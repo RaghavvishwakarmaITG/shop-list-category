@@ -5,128 +5,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <style>
-        h2 {
-            text-align: center;
-            font-size: xxx-large;
-            font-family: cursive;
-            color: dimgray;
-        }
-
-        p {
-            color: #696969;
-        }
-
-        .div01 {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        select.select {
-            padding: 15px 20px;
-            border-radius: 10px;
-            font-family: monospace;
-            border: 1px solid #d1cccc;
-            font-size: 18px;
-            cursor: -webkit-grab;
-        }
-
-        body {
-            background: azure;
-        }
-
-        div#divnew {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            margin: 50px 30px;
-            padding: 0px 58px;
-            row-gap: 30px;
-            column-gap: 50px;
-        }
-
-        .productsitems {
-            background: antiquewhite;
-            text-align: center;
-            border-radius: 25px;
-            font-family: sans-serif;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            will-change: transform;
-            font-size: 15px;
-
-        }
-
-        .productsitems:hover {
-            transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-            transform: translate3d(0, -4px, 0);
-            backface-visibility: hidden;
-            box-shadow: 0 10px 15px rgba(0, 0, 5, 0.2);
-            /* -webkit-transform-style: preserve-3d; */
-            -webkit-backface-visibility: hidden;
-        }
-
-        h4 {
-            font-size: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+    <h1 class="heading">🛍️ Shop Item Filter</h1>
+    <div class="option">
+        <div class="select">
+            <select name="allcategory" id="category">
+                <option value="allcategory">All Categories</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+            </select>
+        </div>
+        <div class="select">
+            <select name="alltypes" id="types">
+                <option value="alltypes">All Types</option>
+                <option value="jeans">jeans</option>
+                <option value="tshirt">tshirt</option>
+                <option value="shirt">shirt</option>
+                <option value="pant">pant</option>
+                <option value="mix">mix</option>
+            </select>
+        </div>
+    </div>
+    <div id="container">
 
-
-    <h2> 🛍️ shop item</h2>
-
-    <div class="div01">
-        <select name="categrory" id="sel01" class="select">
-            <option value="categrory"> All category</option>
-            <option value="Men"> Men </option>
-            <option value="Women"> Women </option>
-            <option value="Kids"> Kids </option>
-
-        </select>
-
-        <select name="types" id="sel02" class="select">
-            <option value="types"> All Types</option>
-            <option value="jeans"> Jeans </option>
-            <option value="tshirt"> T-shirt </option>
-            <option value="shirt"> Shirt </option>
-            <option value="pant"> Pant </option>
-            <option value="mix"> mix </option>
-
-        </select>
     </div>
 
-    <div id="divnew"> </div>
+
 
     <script>
-
-
-        let selectopt = document.getElementById("sel01")
-        let selectopt02 = document.getElementById("sel02")
-        let divnew = document.getElementById("divnew")
-        let seleccateg = "categrory"
-        let selectype = "types"
-
+        const types = document.getElementById("types");
+        const category = document.getElementById("category");
+        const container = document.getElementById("container");
+        let currentCategory = "allcategory";
+        let currentType = "alltypes"
         const shopItems = [
+
             { name: "Slim Fit Jeans", category: "Men", type: "jeans", price: 1200 },
-            { name: "Casual T-shirt", category: "Men", type: "t-shirt", price: 600 },
+            { name: "Casual T-shirt", category: "Men", type: "tshirt", price: 600 },
             { name: "Formal Shirt", category: "Men", type: "shirt", price: 1100 },
             { name: "Track Pant", category: "Men", type: "pant", price: 900 },
-            { name: "Printed T-shirt", category: "Women", type: "t-shirt", price: 750 },
+            { name: "Printed T-shirt", category: "Women", type: "tshirt", price: 750 },
             { name: "Denim Jeans", category: "Women", type: "jeans", price: 1500 },
             { name: "Combo Pack", category: "Men", type: "mix", price: 2000 },
             { name: "Kids Shorts", category: "Kids", type: "pant", price: 500 },
             { name: "Girls Frock", category: "Kids", type: "mix", price: 800 },
-            { name: "Oversized Hoodie", category: "Women", type: "t-shirt", price: 1300 },
+            { name: "Oversized Hoodie", category: "Women", type: "tshirt", price: 1300 },
             { name: "Cargo Pants", category: "Men", type: "pant", price: 1400 },
             { name: "Polka Dot Shirt", category: "Women", type: "shirt", price: 1000 },
             { name: "Running Shorts", category: "Men", type: "pant", price: 800 },
             { name: "Ankle Jeans", category: "Women", type: "jeans", price: 1600 },
             { name: "Winter Combo", category: "Women", type: "mix", price: 2200 },
-            { name: "Boys T-shirt", category: "Kids", type: "t-shirt", price: 450 },
+            { name: "Boys T-shirt", category: "Kids", type: "tshirt", price: 450 },
             { name: "School Uniform", category: "Kids", type: "shirt", price: 950 },
             { name: "Ethnic Set", category: "Women", type: "mix", price: 1800 },
             { name: "Linen Shirt", category: "Men", type: "shirt", price: 1250 },
@@ -134,52 +70,44 @@
         ];
 
 
-
-
-
-        function render(value) {
-            divnew.innerHTML = ""
-            value.forEach(Items => {
-                const item = document.createElement("div");
-                item.setAttribute("class", "productsitems");
-
-                item.innerHTML = `
-                <h4>${Items.name}</h4>
-                <p>${Items.category} • ${Items.type}  • ₹${Items.price}  </p>
-                   `;
-
-                divnew.appendChild(item);
-            })
+        function renderItems(items) {
+            container.innerHTML = "";
+            items.forEach(product => {
+                const card = document.createElement("div");
+                card.setAttribute("class", "card");
+                card.innerHTML = `
+                  <h2>${product.name}</h2>
+                  <p> ${product.category}</p>
+                  <p> ${product.type}</p>
+                  <p> ${product.price}</p>
+                `
+                container.appendChild(card);
+            });
         }
 
-        function filterdataCT(para, para2) {
+        function filterDataWithCategoryAndType(selectCategory, selectType) {
+            const filterdata = shopItems.filter((product) => {
+                const
+                    isMatchCategory = product.category === selectCategory || currentCategory == "allcategory";
+                const isMatchType = product.type === selectType || currentType == "alltypes";
 
-            const filterdat = shopItems.filter(function (product) {
-                const matchcateg = para === "categrory" || product.category === para;
-                const matchtyp = para2 === "types" || product.type === para2;
-                if (matchcateg && matchtyp) return true
-                else {
-                    return false
-                }
+                //    return isMatchCategory && isMatchType;
+                if (isMatchCategory && isMatchType) return true
+                return false;
             })
-            render(filterdat)
+            renderItems(filterdata);
         }
 
-
-        selectopt.addEventListener("change", (event) => {
-            seleccateg = event.target.value;
-            filterdataCT(seleccateg, selectype);
+        category.addEventListener("change", (event) => {
+            currentCategory = event.target.value;
+            filterDataWithCategoryAndType(currentCategory, currentType);
         })
-        selectopt02.addEventListener("change", (event) => {
-            selectype = event.target.value;
-            filterdataCT(seleccateg, selectype);
+        types.addEventListener("change", (event) => {
+            currentType = event.target.value;
+            filterDataWithCategoryAndType(currentCategory, currentType);
         })
-        render(shopItems)
-
-
-
+        renderItems(shopItems)
     </script>
-
 </body>
 
 </html>
